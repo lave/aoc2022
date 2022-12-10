@@ -39,12 +39,12 @@
 
 (define-values (lines-crates lines-moves) (splitf-at (file->lines "05.input") non-empty-string?))
 (define crates (parse-crates (reverse lines-crates)))
-;(println crates)
 (define moves (map parse-move (cdr lines-moves)))
+;(println crates)
 ;(println moves)
 
 (define tops1 (tops (foldl (curry make-move #f) crates moves)))
-(println tops1)
+(displayln tops1)
 
 (define tops2 (tops (foldl (curry make-move #t) crates moves)))
-(println tops2)
+(displayln tops2)
