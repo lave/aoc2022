@@ -23,8 +23,8 @@
 
 (define pairs (map make-pair (file->lines "04.input")))
 
-(define overlaps1 (filter (curry apply full-overlap?) pairs))
-(println (length overlaps1))
+(define full-overlaps (filter (curry apply full-overlap?) pairs))
+(displayln (length full-overlaps))
 
-(define overlaps2 (filter (curry apply overlap?) pairs))
-(println (length overlaps2))
+(define overlaps (filter (curry apply overlap?) pairs))
+(displayln (length overlaps))
