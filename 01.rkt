@@ -1,9 +1,25 @@
 #lang racket
 
-(define lines (file->lines "01.input"))
-(define nums (foldl (lambda (l ns) (if (non-empty-string? l) (cons (cons (string->number l) (car ns)) (cdr ns)) (cons '() ns))) '(()) lines))
-(define sums (map (lambda (a) (apply + a)) nums))
-(println (apply max sums))
+(define (split-by-separator lst is-separator?)
+  (reverse (map reverse
+    (foldl
+      (lambda (element result)
+        (if (is-separator? element)
+          (cons '() result)
+          (cons (cons element (car result)) (cdr result))
+        ))
+      '(()) lst
+    )))
+)
 
-(define top3 (take (sort sums >) 3))
-(println (apply + top3))
+
+(define lines (file->lines "01.input"))
+(define numbers (map string->number lines))
+(define inventories (split-by-separator numbers not))
+;(println inventories)
+
+(define weights (sort (map (curry apply +) inventories) >))
+(displayln (car weights))
+
+(define weights-top3 (take weights 3))
+(println (apply + weights-top3))
