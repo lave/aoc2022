@@ -1,6 +1,8 @@
 #lang racket
 
-(provide empty-string? split-by split-by-separator string-split-at transpose)
+(provide bool->number empty-string? split-by split-by-separator string-split-at map-1st map-2nd transpose)
+
+(define (bool->number b) (if b 1 0))
 
 (define (empty-string? s) (not (non-empty-string? s)))
 
@@ -25,7 +27,14 @@
   (list (substring s 0 i) (substring s i))
 )
 
+(define (map-1st f pair)
+  (list (f (car pair)) (cadr pair))
+)
+
+(define (map-2nd f pair)
+  (list (car pair) (f (cadr pair)))
+)
+
 (define (transpose matrix)
   (apply map list (map string->list matrix))
 )
- 
