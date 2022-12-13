@@ -1,12 +1,9 @@
 #lang racket
 
-(define (split-middle s)
-  (define m (quotient (string-length s) 2))
-  (list (substring s 0 m) (substring s m))
-)
+(require "common.rkt")
 
-(define (split-by lst n)
-  (if (not (empty? lst)) (cons (take lst n) (split-by (drop lst n) n)) '())
+(define (split-middle s)
+  (string-split-at s (quotient (string-length s) 2))
 )
 
 (define (priority item)

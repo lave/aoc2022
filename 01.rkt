@@ -1,16 +1,6 @@
 #lang racket
 
-(define (split-by-separator lst is-separator?)
-  (reverse (map reverse
-    (foldl
-      (lambda (element result)
-        (if (is-separator? element)
-          (cons '() result)
-          (cons (cons element (car result)) (cdr result))
-        ))
-      '(()) lst
-    )))
-)
+(require "common.rkt")
 
 
 (define lines (file->lines "01.input"))

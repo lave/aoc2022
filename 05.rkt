@@ -1,7 +1,9 @@
 #lang racket
 
+(require "common.rkt")
+
 (define (parse-crates crates)
-  (define transposed (apply map list (map string->list crates)))
+  (define transposed (transpose crates))
   (define lines-stack (filter (lambda (l) (not-space (car l))) transposed))
   (define stacks (map (lambda (l) (reverse (takef (cdr l) not-space))) lines-stack))
   stacks
