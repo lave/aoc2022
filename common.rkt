@@ -1,6 +1,6 @@
 #lang racket
 
-(provide bool->number empty-string? split-by split-by-separator string-split-at map-1st map-2nd transpose)
+(provide bool->number empty-string? split-by split-by-separator string-split-at map-1st map-2nd transpose take-safe)
 
 (define (bool->number b) (if b 1 0))
 
@@ -38,3 +38,8 @@
 (define (transpose matrix)
   (apply map list (map string->list matrix))
 )
+
+(define (take-safe l n)
+  (if (> n (length l)) l (take l n))
+)
+

@@ -1,7 +1,7 @@
 #lang racket
 
-(provide create-matrix lists->matrix matrix->lists matrix->list matrix-dims matrix-map matrix-ref matrix-ref2 matrix-set
-         matrix-set2)
+(provide create-matrix lists->matrix matrix->lists matrix->list matrix-dims matrix-map matrix-ref matrix-ref2
+         matrix-copy matrix-ref2_ matrix-set matrix-set2 matrix-set2_)
 
 (define (create-matrix w h v)
   (build-vector h (lambda (y) (build-vector w (const v))))
@@ -44,6 +44,10 @@
   (matrix-ref m (car coord) (cadr coord))
 )
 
+(define (matrix-ref2_ m coord)
+  (matrix-ref m (car coord) (cdr coord))
+)
+
 (define (matrix-set m x y v)
   (vector-set! (vector-ref m y) x v)
   m
@@ -52,5 +56,14 @@
 (define (matrix-set2 m coord v)
   (vector-set! (vector-ref m (cadr coord)) (car coord) v)
   m
+)
+
+(define (matrix-set2_ m coord v)
+  (vector-set! (vector-ref m (cdr coord)) (car coord) v)
+  m
+)
+
+(define (matrix-copy m)
+  (vector-map vector-copy m)
 )
 
